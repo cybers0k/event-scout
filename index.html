@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Event scout prompt</title>
+<style>
+:root{--bg:#F6F5F1;--card:#FFFFFF;--ink:#1F1E1B;--muted:#62605A;--line:#DDDAD1;--accent:#1D6B57;--accent-ink:#FFFFFF}
+@media (prefers-color-scheme: dark){:root{--bg:#161614;--card:#1F1E1B;--ink:#ECEAE3;--muted:#A7A49B;--line:#3A3933;--accent:#5DCAA5;--accent-ink:#0E2A22}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+main{max-width:640px;margin:0 auto;padding:24px 18px 48px}
+h1{font-size:26px;line-height:1.2;margin:0 0 6px;font-weight:600}
+.sub{color:var(--muted);margin:0 0 20px}
+ol.how{margin:0 0 22px;padding-left:22px}
+ol.how li{margin:6px 0}
+.btn{display:block;width:100%;padding:16px;border:0;border-radius:12px;background:var(--accent);color:var(--accent-ink);font:600 17px/1 inherit;font-family:inherit;cursor:pointer}
+.btn:active{transform:translateY(1px)}
+[hidden]{display:none!important}
+.status{min-height:1.4em;margin:8px 0 18px;text-align:center;color:var(--muted);font-size:14px}
+pre{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;white-space:pre-wrap;word-wrap:break-word;font:13.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;margin:0;-webkit-user-select:all;user-select:all}
+.note{color:var(--muted);font-size:14px;margin-top:18px}
+</style>
+</head>
+<body>
+<main>
+<h1>Event scout prompt</h1>
+<p class="sub">Find in-person events where you can meet the right people. Works with a free Claude account.</p>
+<ol class="how">
+<li>Tap <b>Copy prompt</b>.</li>
+<li>Open a new chat in Claude and paste it.</li>
+<li>When Claude asks, paste your step 1 and step 2 answers from your notes.</li>
+</ol>
+<button class="btn" id="copy" type="button">Copy prompt</button>
+<p class="status" id="status" role="status"></p>
+<pre id="prompt">You are my event scout. Help me find in-person events where I can meet the right people for my career. Keep every reply short: I'm on my phone.
+
+STEP 1 – ABOUT ME
+Ask me these in one message, then wait:
+- My current situation (job seeking, changing careers, founder, freelancer, student)
+- My field, role and seniority, and any specific tech or tools I work with
+- What I can offer the people I meet
+- Languages I'm comfortable networking in
+- Do I prefer big conferences or small meetups?
+
+STEP 2 – MY GOAL
+Ask me these in one message, then wait:
+- Who exactly I want to meet (roles, types of companies)
+- What I want out of it (job, clients, mentor, co-founder, learning)
+- City or region, and max travel time
+- Time window, and how many events a month I can do
+- Free only, or my ticket budget; mornings or evenings
+- Organisations, communities or event platforms I already know (e.g. Meetup, Luma, Eventbrite, LinkedIn Events), and anything to exclude
+Then sum up my goal in 2 lines and ask me to confirm.
+
+STEP 3 – WHERE THESE PEOPLE GATHER
+- Search the web for sources where the people I want to meet gather in my area: organisers, hubs, incubators, communities, associations, plus event listing sites.
+- Show me the full list, grouped by type, one line each: name, link, who gathers there.
+- Ask me to add sources I know, then to pick the 3 I want you to scan first. Then wait.
+
+STEP 4 – LIGHT SEARCH
+- Open one events page per source I picked, and no other pages. If I picked a whole platform like Luma or Meetup, search it only for my city and topic, and open just that one results page.
+- Never take a date or detail from a search snippet: if it's not on a page you opened, write "unknown".
+- Judge each event by who will be in the room, not by the topic. Recurring events beat one-offs, because people start to recognise you. Mark events only good for general networking as such.
+- Only list events you actually found, with their real link. Never invent an event or a detail.
+- Show max 15 events in my time window as one table, sorted by fit (high first, then medium, then low), with these columns:
+# | Fit | Event (name as a link) | Date | Who's in the room
+- Below the table: which sources had no usable events page (so I can sign up to their newsletter), and a reminder that I can ask you to scan the next 3 sources.
+- Stop and ask me which events to look into, by number.
+
+STEP 5 – DETAILS AND FILE
+- Reuse everything you already found in step 4. Only look up details that are still missing, and only for the events I pick.
+- If I picked an event from a listing site, check it on the organiser's own page when there is one.
+- Then create an Excel file (.xlsx) with all events found, one row each, and these columns in this order:
+Event name | Date | Time | Recurring | Venue / city | Organiser / source | Link | Who's in the room | Why it fits you | Cost | Registration | Language | Fit score | Status | Notes
+- Status is "Found" for events I didn't pick, "Shortlisted" for the ones I did. Point out clashes between events.
+
+STEP 6 – TRACKING
+When I tell you which events I'm going to, skip or attended, update Status (Going / Not going / Attended) and Notes, and give me the updated file. If I upload this file in a new chat, read it and continue from there.</pre>
+<p class="note">Ran out of free usage? Your chat is saved. Come back later, open the same chat and carry on.</p>
+<h2 style="font-size:20px;margin:36px 0 6px;font-weight:600">Set it up as a skill (optional)</h2>
+<p class="sub" style="margin-bottom:12px">Install it once and just ask Claude "Find me networking events" from then on.</p>
+<ol class="how">
+<li>Download the skill file below.</li>
+<li>On a computer, or at claude.ai in your phone's browser (not the app), go to Customize &gt; Skills.</li>
+<li>Tap "+", then Create skill, then Upload a skill, and choose the file.</li>
+<li>Turn it on, then ask: "Find me networking events."</li>
+</ol>
+<a class="btn" style="text-align:center;text-decoration:none;box-sizing:border-box" href="data:application/zip;base64,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" download="event-scout-skill.zip">Download skill (.zip)</a>
+</main>
+<script>
+(function(){
+  var btn=document.getElementById('copy'),st=document.getElementById('status'),pre=document.getElementById('prompt');
+  function selectText(){try{var r=document.createRange();r.selectNodeContents(pre);var s=window.getSelection();s.removeAllRanges();s.addRange(r);}catch(e){}}
+  btn.addEventListener('click',function(){
+    var text=pre.textContent;
+    var done=function(){st.textContent='Copied. Now paste it into a new Claude chat.';};
+    var fail=function(){selectText();st.textContent='Text selected. Tap Copy in your phone menu.';};
+    try{
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,fail);}
+      else{fail();}
+    }catch(e){fail();}
+  });
+})();
+</script>
+
+</body>
+</html>
